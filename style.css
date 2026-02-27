@@ -1,0 +1,120 @@
+:root {
+    --dark-blue: #0a192f;
+    --accent-blue: #1e3a8a;
+    --primary-orange: #f59e0b;
+    --btn-blue: #2563eb;
+    --text-gray: #64748b;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    color: white;
+}
+
+.btn-join {
+    background: var(--primary-orange);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: var(--dark-blue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    background: radial-gradient(circle at top right, #1e40af, #0a192f);
+    color: white;
+    padding: 80px 8%;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    width: 100%;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin: 20px 0;
+    line-height: 1.2;
+}
+
+.btn-primary {
+    background: var(--primary-orange);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 60px 8%;
+    margin-top: -50px; /* Pulls cards slightly over the hero */
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature-card:hover { transform: translateY(-10px); }
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.html-bg { background: #fee2e2; }
+.css-bg { background: #ffedd5; }
+.js-bg { background: #dbeafe; }
+
+.btn-outline {
+    border: 2px solid var(--btn-blue);
+    background: transparent;
+    color: var(--btn-blue);
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline.orange { border-color: var(--primary-orange); color: var(--primary-orange); }

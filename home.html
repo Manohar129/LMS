@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPulse | Advanced Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-glass-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <span>EduPulse</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">Dashboard</a>
+                <a href="#" class="nav-item">My Courses</a>
+                <a href="#" class="nav-item">Assignments</a>
+                <a href="#" class="nav-item">Messages</a>
+                <a href="#" class="nav-item">Settings</a>
+            </nav>
+            <div class="user-profile-summary">
+                <div class="avatar"></div>
+                <div class="info">
+                    <p class="name">{{ user.name }}</p>
+                    <p class="rank">Pro Learner</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="search-box">
+                    <input type="text" placeholder="Search your courses...">
+                </div>
+                <div class="header-actions">
+                    <button class="notif-btn" id="notif-btn">
+                        <span class="pulse"></span>🔔
+                    </button>
+                </div>
+            </header>
+
+            <section class="welcome-banner">
+                <div class="banner-text">
+                    <h1>Ready to grow, {{ user.name }}?</h1>
+                    <p>You've completed 80% of your weekly goal. Keep it up!</p>
+                </div>
+            </section>
+
+            <section class="stats-grid">
+                <div class="stat-card blue"><h3>12</h3><p>Active Courses</p></div>
+                <div class="stat-card purple"><h3>05</h3><p>Certificates</p></div>
+                <div class="stat-card orange"><h3>24</h3><p>Hours Studied</p></div>
+            </section>
+
+            <div class="section-header">
+                <h2>Continue Learning</h2>
+                <a href="#">View All</a>
+            </div>
+
+            <div class="course-grid">
+                {% for course in user.enrolled_courses %}
+                <div class="course-card" data-id="{{ course.id }}">
+                    <div class="card-thumb">
+                        <span class="category-tag">Coding</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ course.title }}</h3>
+                        <div class="progress-info">
+                            <div class="progress-bar-bg">
+                                <div class="progress-fill" style="width: {{ course.progress }}%"></div>
+                            </div>
+                            <span>{{ course.progress }}%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+    // 1. Notification System with Fetch
+    const notifBtn = document.getElementById('notif-btn');
+    
+    const showNotification = async () => {
+        try {
+            // Using your Python Backend API
+            const response = await fetch('/api/notifications');
+            const data = await response.json();
+            
+            // Modern UI: Custom Modal instead of Alert
+            const msg = data[0]?.msg || "No new updates";
+            createToast(msg);
+        } catch (e) {
+            console.error("API Error", e);
+        }
+    };
+
+    notifBtn.addEventListener('click', showNotification);
+
+    // 2. Custom Toast Notification Creator
+    function createToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-popup';
+        toast.innerHTML = `<strong>Update:</strong> ${message}`;
+        document.body.appendChild(toast);
+        
+        // Auto-remove after 3 seconds
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    // 3. Smooth Card Interaction
+    const courseCards = document.querySelectorAll('.course-card');
+    courseCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const courseId = card.dataset.id;
+            // Visual feedback before navigation
+            card.style.opacity = '0.7';
+            console.log(`Navigating to course ${courseId}...`);
+            // window.location.href = `/course/${courseId}`;
+        });
+    });
+});
+    </script>
+</body>
+</html>
