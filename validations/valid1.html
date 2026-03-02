@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>login <form action=""></form> validations</h3>
+    <label for="text">Email:</label>
+    <input type="text" id="email" placeholder="Enter your email">
+    <p id="emailmsg"></p>
+    <label for="pwd">Password:</label>
+    <input type="password" id="pwd" placeholder="Enter your password">
+    <p id="passmsg"></p>
+    <button onclick="validation()">login</button>
+    <p id="emailMsg"></p>
+<script>
+function validation() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("pwd").value;
+
+    let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let passpattern=/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+    if (emailPattern.test(email)) {
+        document.getElementById("emailmsg").innerText = "Valid email!";
+        
+    } else {
+        document.getElementById("emailmsg").innerText = "Invalid email!";
+    }
+    if (passpattern.test(password)) {
+        document.getElementById("passmsg").innerText = "Valid password!";
+    } else {
+        document.getElementById("passmsg").innerText = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.";
+    }
+    
+}
+</script>
+
+</body>
+</html>

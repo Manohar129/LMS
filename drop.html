@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="course">
+    <option value="">Select Course</option>
+    <option>HTML</option>
+    <option>CSS</option>
+</select>
+<button onclick="checkCourse()">Submit</button>
+<p id="courseMsg"></p>
+
+<script>
+function checkCourse() {
+    let course = document.getElementById("course").value;
+
+    if (course === "") {
+        document.getElementById("courseMsg").innerText = "Please select a course!";
+    } else {
+        document.getElementById("courseMsg").innerText = "Selected: " + course;
+    }
+}
+</script>
+
+</body>
+</html>
